@@ -17,6 +17,7 @@ import {
 } from "@/styles";
 
 import type { Task, Holiday } from "@/types/types";
+import { EditableTaskTitle } from "./EditableTaskTitle";
 
 type CalendarBodyProps = {
   dayNames: string[];
@@ -135,35 +136,12 @@ export function CalendarBody({
                             {...provided.dragHandleProps}
                             color={task.color}
                             isDragging={snapshot.isDragging}
-                            onDoubleClick={() =>
-                              setEditingTask({ date, taskId: task.id })
-                            }
                           >
-                            {editingTask?.taskId === task.id ? (
-                              <div>
-                                <TaskInput
-                                  defaultValue={task.title}
-                                  autoFocus
-                                  onBlur={(e) =>
-                                    editTask(task.id, e.target.value)
-                                  }
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                      editTask(task.id, e.currentTarget.value);
-                                    } else if (e.key === "Escape") {
-                                      setEditingTask(null);
-                                    } else if (
-                                      e.key === "Delete" &&
-                                      e.ctrlKey
-                                    ) {
-                                      deleteTask(task.id);
-                                    }
-                                  }}
-                                />
-                              </div>
-                            ) : (
-                              <TaskTitle>{task.title}</TaskTitle>
-                            )}
+                            <EditableTaskTitle
+                              title={task.title}
+                              onSave={(newTitle) => editTask(task.id, newTitle)}
+                              onDelete={() => deleteTask(task.id)}
+                            />
                           </TaskCard>
                         )}
                       </Draggable>

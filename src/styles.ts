@@ -118,9 +118,11 @@ export const DayCell = styled.div<{
   isOtherMonth: boolean;
 }>`
   background-color: ${(props) => (props.isOtherMonth ? "#f8f9fa" : "white")};
-  min-height: 140px;
+  min-height: 172px;
   padding: 8px;
   position: relative;
+   min-width: 172px;
+  overflow: hidden;
   border-bottom: 1px solid #ddd;
 
   &:hover {
@@ -199,13 +201,19 @@ export const TaskTitle = styled.div`
 
 export const TaskInput = styled.input`
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 6px 8px;
   border: 2px solid #3b82f6;
   border-radius: 4px;
   font-size: 12px;
   outline: none;
   background-color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
+
 
 export const ColorPicker = styled.div`
   display: flex;
