@@ -12,7 +12,6 @@ import {
   TaskCount,
   HolidayItem,
   TaskCard,
-  TaskTitle,
   TaskInput,
 } from "@/styles";
 
